@@ -1,7 +1,4 @@
-import { 
-    SafeAreaView, 
-    StyleSheet 
-} from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { registerRootComponent } from 'expo';
 import { ThemeProvider } from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
