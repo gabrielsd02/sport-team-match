@@ -1,49 +1,49 @@
 {
   "project_info": {
-    "project_number": "635770274206",
+    "project_number": "",
     "project_id": "sport-team-match",
-    "storage_bucket": "sport-team-match.appspot.com"
+    "storage_bucket": ""
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:635770274206:android:c56b9cc8dfa1ba70bb168f",
+        "mobilesdk_app_id": "",
         "android_client_info": {
-          "package_name": "com.gabrielsd02.sportteammatch"
+          "package_name": ""
         }
       },
       "oauth_client": [
         {
-          "client_id": "635770274206-lkmarqqg54vohe1k55tbr9vd6je32ufb.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gabrielsd02.sportteammatch",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": ""
           }
         },
         {
-          "client_id": "635770274206-uibnugn180bpiqc3edeadavvmfbng3k6.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gabrielsd02.sportteammatch",
-            "certificate_hash": "7f3fdb52ac4bbbd78adf95876218e0dc72cc8d5b"
+            "certificate_hash": ""
           }
         },
         {
-          "client_id": "635770274206-d7ib2l4umigb9cg3v11vu08hce4lkiq2.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDqaJMU7PATfOnNQyznJm5dPifZeUNC5ZQ"
+          "current_key": ""
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "635770274206-cp9p5mfqpk1hlo7m643jsee7aqh95ego.apps.googleusercontent.com",
+              "client_id": "",
               "client_type": 3
             }
           ]
