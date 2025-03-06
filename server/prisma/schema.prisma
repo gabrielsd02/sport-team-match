@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Categoria {
+  id           Int      @id @default(autoincrement())
+  nome         String   @unique @db.VarChar(50)
+  icone        String   @db.LongText
+  dataCadastro DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("data_cadastro") @db.Timestamp()
+  ativo        String   @default("S") @db.Char(1)
+  Evento       Evento[]
+
+  @@map("categoria")
+}
+
+model Usuario {
+  id                Int      @id @default(autoincrement())
+  nome              String   @db.VarChar(30)
+  email             String   @unique @db.VarChar(60)
+  senha             String   @db.TinyText // armazena até 255 caracteres
+  dataNascimento    DateTime @map("data_nascimento") @db.Date
+  foto              String?  @db.LongText
+  telefone          String?  @db.VarChar(30)
+  sexo              String?  @db.Char(1)
+  latitude          Float?   @db.Double()
+  longitude         Float?   @db.Double()
+  codigoRecuperacao String?  @map("codigo_recuperacao") @db.VarChar(60)
+  dataCadastro      DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("data_cadastro") @db.Timestamp()
+  ativo             String   @default("S") @db.Char(1)
+
+  AvaliacoesFeitas    AvaliacoesUsuarios[] @relation("AvaliacoesFeitas")
+  AvaliacoesRecebidas AvaliacoesUsuarios[] @relation("AvaliacoesRecebidas")
+  ConviteEmissor      Convite[]            @relation("ConviteEmissor")
+  ConviteDestinatario Convite[]            @relation("ConviteDestinatario")
+  EventoCriador       Evento[]             @relation("EventoCriador")
+  Participante        Participante[]
+
+  @@map("usuario")
+}
+
+model AvaliacoesUsuarios {
+  id                 Int      @id @default(autoincrement())
+  idUsuarioAvaliador Int      @map("id_usuario_avaliador")
+  idUsuarioAlvo      Int      @map("id_usuario_alvo")
+  nota               Float
+  comentario         String?  @db.Text //  Armazena até 65,535 caracteres
+  dataCadastro       DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("data_cadastro") @db.Timestamp()
+  ativo              String   @default("S") @db.Char(1)
+
+  UsuarioAvaliador Usuario @relation("AvaliacoesFeitas", fields: [idUsuarioAvaliador], references: [id], onDelete: Cascade)
+  UsuarioAlvo      Usuario @relation("AvaliacoesRecebidas", fields: [idUsuarioAlvo], references: [id], onDelete: Cascade)
+
+  @@map("avaliacoes_usuarios")
+}
+
+model Convite {
+  id                    Int      @id @default(autoincrement())
+  idEvento              Int      @map("id_evento")
+  idUsuarioEmissor      Int      @map("id_usuario_emissor")
+  idUsuarioDestinatario Int      @map("id_usuario_destinatario")
+  descricao             String?  @db.TinyText
+  tipo                  String   @db.VarChar(30)
+  dataCadastro          DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("data_cadastro") @db.Timestamp()
+  ativo                 String   @default("S") @db.Char(1)
+
+  Evento              Evento  @relation(fields: [idEvento], references: [id], onDelete: Cascade)
+  UsuarioEmissor      Usuario @relation("ConviteEmissor", fields: [idUsuarioEmissor], references: [id], onDelete: Cascade)
+  UsuarioDestinatario Usuario @relation("ConviteDestinatario", fields: [idUsuarioDestinatario], references: [id], onDelete: Cascade)
+
+  @@map("convite")
+}
+
+model Evento {
+  id                  Int      @id @default(autoincrement())
+  idUsuarioCriador    Int      @map("id_usuario_criador")
+  idCategoria         Int      @map("id_categoria")
+  nome                String   @db.VarChar(200)
+  descricao           String   @db.VarChar(300)
+  dataHoraInicio      DateTime @map("data_hora_inicio")
+  local               String   @db.VarChar(200)
+  duracao             DateTime @db.Time()
+  valorEntrada        Float?   @default(0) @map("valor_entrada")
+  limiteParticipantes Int      @map("limite_participantes")
+  latitude            Float    @db.Double()
+  longitude           Float    @db.Double()
+  dataCadastro        DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("data_cadastro") @db.Timestamp()
+  ativo               String   @default("S") @db.Char(1)
+
+  UsuarioCriador Usuario        @relation("EventoCriador", fields: [idUsuarioCriador], references: [id], onDelete: Cascade)
+  Categoria      Categoria      @relation(fields: [idCategoria], references: [id], onDelete: Cascade)
+  Participante   Participante[]
+  Convite        Convite[]
+
+  @@map("evento")
+}
+
+model Participante {
+  id           Int      @id @default(autoincrement())
+  idUsuario    Int      @map("id_usuario")
+  idEvento     Int      @map("id_evento")
+  dataCadastro DateTime @default(dbgenerated("CURRENT_TIMESTAMP")) @map("data_cadastro") @db.Timestamp()
+  ativo        String   @default("S") @db.Char(1)
+
+  UsuarioParticipante Usuario @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  EventoParticipante  Evento  @relation(fields: [idEvento], references: [id], onDelete: Cascade)
+
+  @@map("participante")
+}

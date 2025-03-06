@@ -1,0 +1,73 @@
+{
+  "expo": {
+    "name": "SporTeaMatch",
+    "slug": "sport-team-match",
+    "scheme": "com.gabrielsd02.sportteammatch",
+    "version": "1.0.0",
+    "primaryColor": "#B7C2FF",
+    "backgroundColor": "#041562",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/logo-sport-team-2.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/images/capa-projeto.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#808080"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "requireFullScreen": true,
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": ""
+      }
+    },
+    "android": {
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/logo-sport-team-2.png",
+        "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.gabrielsd02.sportteammatch"
+    },
+    "web": {
+      "favicon": "./src/assets/images/logo-sport-team-2.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a13bd08d-09e7-41be-bebd-24a8b86c5adc"
+      }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O aplicativo acessa sua galeria de fotos, com o intuito de mostrar sua foto para os demais participantes."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Permita o SporTeaMatch utilizar sua localização."
+        }
+      ],
+      "@react-native-google-signin/google-signin"
+    ],
+    "autolinking": {
+      "exclude": ["expo-font"]
+    }
+  }
+}
